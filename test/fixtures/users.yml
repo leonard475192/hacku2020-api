@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  monstar_id: 
+  level: 
+  hp: 
+  ep: 
+  physical: 
+  intelligence: 
+  lifestyle: 
+  others: 
+
+two:
+  name: MyString
+  monstar_id: 
+  level: 
+  hp: 
+  ep: 
+  physical: 
+  intelligence: 
+  lifestyle: 
+  others: 
