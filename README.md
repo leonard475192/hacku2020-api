@@ -40,8 +40,8 @@ https://qiita.com/fujiwarawataru/items/5490b550441c0e79f5de
 
 # TODO
 ・動くapi（fin）
-・DBの結びつけ（now）
-・認証
+・DBの結びつけ（fin）
+・認証（fin）
 ・画像の管理
 ・user:presenceのエラーの返し方
 ・validates tag 文字列一致
