@@ -33,3 +33,20 @@ error:とりあえず…　要修正
 「paramsが:userというキーを持っていて、かつ
 　params[:user]が、:nameと:ageというキーを持つハッシュである」こと
 https://qiita.com/Takka_Log/items/32dae78d7e3892e7b051
+
+for heroku:
+https://qiita.com/fujiwarawataru/items/5490b550441c0e79f5de
+
+
+# TODO
+・動くapi（fin）
+・DBの結びつけ（now）
+・認証
+・画像の管理
+・user:presenceのエラーの返し方
+・validates tag 文字列一致
+
+・進化処理どっち？
+
+・＋アルファのユーザーをはまらせる仕組み
+    おわよくば、通信するメリットを使いたい

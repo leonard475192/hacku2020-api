@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_20_090507) do
+ActiveRecord::Schema.define(version: 2020_08_21_021853) do
+
+  create_table "monsters", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "todos", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "tag"
+    t.integer "level"
+    t.boolean "status", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.text "explanation"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -24,6 +41,9 @@ ActiveRecord::Schema.define(version: 2020_08_20_090507) do
     t.integer "others", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password"
+    t.string "token"
+    t.index ["token"], name: "index_users_on_token", unique: true
   end
 
 end
