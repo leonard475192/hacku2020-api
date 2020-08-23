@@ -4,13 +4,17 @@ class Api::V1::TodosController < ApplicationController
     before_action :authenticate
   
     def index
-      todos = Todo.order(created_at: :desc)
+      todos = Todo.where(user_id: @auth_user.id).order(created_at: :desc)
       render json: { status: 'SUCCESS', message: 'loaded todos', data: todos }
     end
   
     def show
       todo = Todo.find(params[:id])
-      render json: { status: 'SUCCESS', message: 'loaded the todo', data: todo }
+      if todo.user_id ==  @auth_user.id then
+        render json: { status: 'SUCCESS', message: 'loaded the todo', data: todo }
+      else
+        render json: { status: 'BAD REQUEST', message: 'this is not your todo'}
+      end
     end
   
     def create
@@ -26,16 +30,24 @@ class Api::V1::TodosController < ApplicationController
   
     def destroy
       todo = Todo.find(params[:id])
-      todo.destroy
-      render json: { status: 'SUCCESS', message: 'deleted the todo', data: todo }
+      if todo.user_id ==  @auth_user.id then
+        todo.destroy
+        render json: { status: 'SUCCESS', message: 'deleted the todo'}
+      else
+        render json: { status: 'BAD REQUEST', message: 'this is not your todo'}
+      end
     end
   
     def update
       todo = Todo.find(params[:id])
-      if todo.update(todo_params)
-        render json: { status: 'SUCCESS', message: 'updated the todo', data: todo }
+      if todo.user_id ==  @auth_user.id then
+        if todo.update(todo_params)
+          render json: { status: 'SUCCESS', message: 'updated the todo', data: todo }
+        else
+          render json: { status: 'SUCCESS', message: 'loaded the todo', data: todo }
+        end
       else
-        render json: { status: 'SUCCESS', message: 'loaded the todo', data: todo }
+        render json: { status: 'BAD REQUEST', message: 'this is not your todo'}
       end
     end
   

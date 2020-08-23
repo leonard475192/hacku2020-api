@@ -37,18 +37,24 @@ https://qiita.com/Takka_Log/items/32dae78d7e3892e7b051
 for heroku:
 https://qiita.com/fujiwarawataru/items/5490b550441c0e79f5de
 
+UI
+https://www.figma.com/files/project/13502582/Hack-me
 
 # TODO
 ・動くapi（fin）
 ・DBの結びつけ（fin）
 ・認証（fin）
 ・画像の管理
-・user:presenceのエラーの返し方
+・user:presenceのエラーの返し方（messageで行ける）
 ・validates tag 文字列一致
 
-・進化処理どっち？
+・login のレスポンス
+・進化処理こっち（now）
+・一覧において、Doneと、TODOの別々にレスポンス
+
 
 ・＋アルファのユーザーをはまらせる仕組み
     おわよくば、通信するメリットを使いたい
 
 ・プレゼンのときに、今後の展望
+
