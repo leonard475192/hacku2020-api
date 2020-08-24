@@ -67,6 +67,76 @@ class Api::V1::TodosController < ApplicationController
         render json: { status: 'BAD REQUEST', message: 'this is not your todo'}
       end
     end
+
+    def complete
+      ids = params[:id]
+      data = Hash.new
+      physical = 0
+      ep = [0,0,0,0]
+      getep = 0
+      for id in ids do
+        todo = Todo.find(id)
+        if todo.user_id ==  @auth_user.id then
+          if todo.status == false
+            # TODO完了処理
+            todo.status = true
+            todo.save
+            cell = { id => { status: 'SUCCESS', message: 'cleared the todo'}}
+            data.merge!(cell)
+            # パラメータ処理
+            case todo.tag
+            when "physical"
+              ep[0] +=  todo.level
+            when "intelligence"
+              ep[1] +=  todo.level
+            when "lifestyle"
+              ep[2] +=  todo.level
+            when "others"
+              ep[3] +=  todo.level
+            else
+            end
+          else
+            cell = { id => { status: 'SUCCESS', message: 'already done the todo'}}
+            data.merge!(cell)
+          end
+        else
+          cell = {id => { status: 'BAD REQUEST', message: 'this is not your todo'}}
+          data.merge!(cell)
+        end
+      end
+      # 経験値処理
+      @auth_user.physical += ep[0]
+      @auth_user.intelligence += ep[1]
+      @auth_user.lifestyle += ep[2]
+      @auth_user.others += ep[3]
+      for p in ep
+         getep += p
+      end
+      @auth_user.ep += getep
+      # LvUP処理
+      if @auth_user.ep >= @auth_user.level * 5
+        @auth_user.ep -= @auth_user.level * 5
+        @auth_user.level += 1
+        case @auth_user.level
+        when 2
+          @auth_user.monstar_id = 2
+        when 3
+          if @auth_user.physical > 10
+            @auth_user.monstar_id = 3
+          elsif @auth_user.intelligence > 10
+            @auth_user.monstar_id = 4
+          elsif @auth_user.lifestyle > 10
+            @auth_user.monstar_id = 5
+          else
+            @auth_user.monstar_id = 6
+          end
+        end
+      end
+      @auth_user.save
+      render json: data.to_json
+    end
+
+
   
       private
       def authenticate
@@ -79,4 +149,4 @@ class Api::V1::TodosController < ApplicationController
       def todo_params
         params.require(:todo).permit(:title, :explanation, :tag, :level)
       end
-  end
+end
