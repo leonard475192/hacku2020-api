@@ -37,6 +37,23 @@ class Api::V1::TodosController < ApplicationController
         render json: { status: 'BAD REQUEST', message: 'this is not your todo'}
       end
     end
+
+    def destroy_all
+      ids = params[:id]
+      data = Hash.new
+      for id in ids
+        todo = Todo.find(id)
+        if todo.user_id ==  @auth_user.id then
+          todo.destroy
+          cell = { id => { status: 'SUCCESS', message: 'deleted the todo'}}
+          data.merge!(cell)
+        else
+          cell = {id => { status: 'BAD REQUEST', message: 'this is not your todo'}}
+          data.merge!(cell)
+        end
+      end
+      render json: data.to_json
+    end
   
     def update
       todo = Todo.find(params[:id])

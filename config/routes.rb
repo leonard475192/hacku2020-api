@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :todos
       get 'login/login'
       post 'login/login'
+      post 'todos/destroy_all'
     end
   end
 end
