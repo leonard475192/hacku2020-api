@@ -44,13 +44,16 @@ https://www.figma.com/files/project/13502582/Hack-me
 ・動くapi（fin）
 ・DBの結びつけ（fin）
 ・認証（fin）
-・画像の管理
-・user:presenceのエラーの返し方（messageで行ける）
+・user:presenceのエラーの返し方（messageで行けそう）
 ・validates tag 文字列一致
 
-・login のレスポンス
-・進化処理こっち（now）
-・一覧において、Doneと、TODOの別々にレスポンス
+・login のレスポンス（fin）
+・進化処理こっち（fin）
+・進化のレスポンス
+・hp管理
+・画像管理
+・一覧において、Doneと、TODOの別々にレスポンス（Androidに任せる）
+・存在しないfindのエラー
 
 
 ・＋アルファのユーザーをはまらせる仕組み

@@ -45,10 +45,10 @@ class Api::V1::TodosController < ApplicationController
         todo = Todo.find(id)
         if todo.user_id ==  @auth_user.id then
           todo.destroy
-          cell = { id => { status: 'SUCCESS', message: 'deleted the todo'}}
+          cell = { id => { 'status' => 'SUCCESS', 'message' => 'deleted the todo'}}
           data.merge!(cell)
         else
-          cell = {id => { status: 'BAD REQUEST', message: 'this is not your todo'}}
+          cell = {id => { 'status' => 'BAD REQUEST', 'message' => 'this is not your todo'}}
           data.merge!(cell)
         end
       end
@@ -81,8 +81,6 @@ class Api::V1::TodosController < ApplicationController
             # TODO完了処理
             todo.status = true
             todo.save
-            cell = { id => { status: 'SUCCESS', message: 'cleared the todo'}}
-            data.merge!(cell)
             # パラメータ処理
             case todo.tag
             when "physical"
@@ -96,11 +94,11 @@ class Api::V1::TodosController < ApplicationController
             else
             end
           else
-            cell = { id => { status: 'SUCCESS', message: 'already done the todo'}}
+            cell = {id => { 'status' => 'BAD REQUEST', 'message' => 'already done the todo'}}
             data.merge!(cell)
           end
         else
-          cell = {id => { status: 'BAD REQUEST', message: 'this is not your todo'}}
+          cell = {id => { 'status' => 'BAD REQUEST', 'message' => 'this is not your todo'}}
           data.merge!(cell)
         end
       end
@@ -133,10 +131,11 @@ class Api::V1::TodosController < ApplicationController
         end
       end
       @auth_user.save
+      # ここから、成功時のレスポンス
+      cell = { 'status' => 'SUCCESS', 'message' => 'geted exp', 'data' => @auth_user}
+      data.merge!(cell)
       render json: data.to_json
     end
-
-
   
       private
       def authenticate
