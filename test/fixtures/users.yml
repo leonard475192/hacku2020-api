@@ -2,7 +2,7 @@
 
 one:
   name: MyString
-  monstar_id: 
+  monster_id: 
   level: 
   hp: 
   ep: 
@@ -13,7 +13,7 @@ one:
 
 two:
   name: MyString
-  monstar_id: 
+  monster_id: 
   level: 
   hp: 
   ep: 

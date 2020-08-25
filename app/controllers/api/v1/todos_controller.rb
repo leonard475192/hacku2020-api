@@ -22,7 +22,7 @@ class Api::V1::TodosController < ApplicationController
       logger.debug("todo_params:::")
       logger.debug(todo_params)
       if todo.save
-          render json: { status: 'SUCCESS', message: 'Todo was successfully created.', data: todo }
+          render json: { status: 'SUCCESS', message: 'Todo was successfully created.', data: todo}
         else
           render json: { status: :unprocessable_entity, message: todo.errors }
         end
@@ -117,25 +117,27 @@ class Api::V1::TodosController < ApplicationController
         @auth_user.level += 1
         case @auth_user.level
         when 2
-          @auth_user.monstar_id = 2
+          @auth_user.monster_id = 2
         when 3
           if @auth_user.physical > 10
-            @auth_user.monstar_id = 3
+            @auth_user.monster_id = 3
           elsif @auth_user.intelligence > 10
-            @auth_user.monstar_id = 4
+            @auth_user.monster_id = 4
           elsif @auth_user.lifestyle > 10
-            @auth_user.monstar_id = 5
+            @auth_user.monster_id = 5
           else
-            @auth_user.monstar_id = 6
+            @auth_user.monster_id = 6
           end
         end
       end
       @auth_user.save
+      monster = Monster.find(@auth_user.monster_id)
       # ここから、成功時のレスポンス
-      cell = { 'status' => 'SUCCESS', 'message' => 'geted exp', 'data' => @auth_user}
+      cell = { 'status' => 'SUCCESS', 'message' => 'geted exp', 'data' => @auth_user, 'img' => monster.img}
       data.merge!(cell)
       render json: data.to_json
     end
+    
   
       private
       def authenticate

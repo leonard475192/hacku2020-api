@@ -49,9 +49,9 @@ https://www.figma.com/files/project/13502582/Hack-me
 
 ・login のレスポンス（fin）
 ・進化処理こっち（fin）
-・進化のレスポンス
+・進化のレスポンス（fin）
 ・hp管理
-・画像管理
+・画像管理（三角）
 ・一覧において、Doneと、TODOの別々にレスポンス（Androidに任せる）
 ・存在しないfindのエラー
 
