@@ -5,7 +5,7 @@ class Api::V1::TodosController < ApplicationController
   
     def index
       todos = Todo.where(user_id: @auth_user.id).order(created_at: :desc)
-      render json: { status: 'SUCCESS', message: 'loaded todos', data: todos }
+      render json: todos
     end
   
     def show
